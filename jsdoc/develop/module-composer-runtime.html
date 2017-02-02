@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Fabric Composer Class: IllegalModelException</title>
+	<title>Fabric Composer Module: composer-runtime</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -79,19 +79,10 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: IllegalModelException</h1>
+	<h1 class="page-title">Module: composer-runtime</h1>
 <section>
 
 <header>
-    
-        <h2>
-            <span class="ancestors"><a href="module-composer-common.html">composer-common</a>.</span>
-        
-        IllegalModelException
-        </h2>
-        
-            <div class="class-description"><p>Exception throws when a composer file is semantically invalid</p></div>
-        
     
 </header>
 
@@ -100,9 +91,99 @@
     <div class="container-overview">
     
         
+            <div class="description"><p>The runtime module provides the API that is made available to transaction<br>processing functions.</p></div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="composer-runtime_index.js.html">composer-runtime/index.js</a>,
+				 <a href="composer-runtime_index.js.html#sunlight-1-line-17">line 17</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="module-composer-runtime.AccessException.html">AccessException</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-composer-runtime.AssetRegistry.html">AssetRegistry</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-composer-runtime.Factory.html">Factory</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-composer-runtime.ParticipantRegistry.html">ParticipantRegistry</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
 <hr>
 <dt>
-    <h4 class="name" id="IllegalModelException"><span class="type-signature"></span>new IllegalModelException(message)</h4>
+    <h4 class="name" id="getAssetRegistry"><span class="type-signature"></span>getAssetRegistry(id)</h4>
     
     
 </dt>
@@ -110,7 +191,7 @@
 
     
     <div class="description">
-        <p>Create an IllegalModelException</p>
+        <p>Get an existing asset registry using the unique identifier of the asset<br>registry. An asset registry can be used to retrieve, update, or delete<br>existing assets, or create new assets.</p>
     </div>
     
 
@@ -145,7 +226,7 @@
 
         <tr>
             
-                <td class="name"><code>message</code></td>
+                <td class="name"><code>id</code></td>
             
 
             <td class="type">
@@ -162,7 +243,7 @@
 
             
 
-            <td class="description last"><p>the message for the exception</p></td>
+            <td class="description last"><p>The ID of the asset registry.</p></td>
         </tr>
 
     
@@ -206,8 +287,8 @@
 	<dd class="tag-source">
 		<ul class="dummy">
 			<li>
-				<a href="composer-common_lib_introspect_illegalmodelexception.js.html">composer-common/lib/introspect/illegalmodelexception.js</a>,
-				 <a href="composer-common_lib_introspect_illegalmodelexception.js.html#sunlight-1-line-26">line 26</a>
+				<a href="composer-runtime_lib_api.js.html">composer-runtime/lib/api.js</a>,
+				 <a href="composer-runtime_lib_api.js.html#sunlight-1-line-66">line 66</a>
 			</li>
 		</ul>
 	</dd>
@@ -215,13 +296,6 @@
 
 	
 
-	
-	<dt class="tag-see method-doc-label method-doc-details-label">See:</dt>
-	<dd class="tag-see">
-		<ul>
-			<li><p>See <a href="module-composer-common.BaseException.html">BaseException</a></p></li>
-			</ul>
-	</dd>
 	
 
 	
@@ -239,22 +313,247 @@
     
 
     
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>A promise. The promise is resolved with an {@link<br>module:composer-runtime.AssetRegistry AssetRegistry} instance<br>representing the asset registry if it exists. If the asset registry<br>does not exist, or the current user does not have access to the asset<br>registry, then the promise will be rejected with an error that describes<br>the problem.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">// Get the vehicle asset registry.
+return getAssetRegistry(&#x27;org.acme.Vehicle&#x27;)
+  .then(function (vehicleAssetRegistry) {
+    // Call methods on the vehicle asset registry.
+  })
+  .catch(function (error) {
+    // Add optional error handling here.
+  });</pre>
+
 
     
 </dd>
 
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="getCurrentParticipant"><span class="type-signature"></span>getCurrentParticipant()</h4>
     
-    </div>
+    
+</dt>
+<dd>
 
     
-        <h3 class="subsection-title">Extends</h3>
+    <div class="description">
+        <p>Get the current participant. The current participant is determined by<br>the identity that was used to submit the current transaction.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="composer-runtime_lib_api.js.html">composer-runtime/lib/api.js</a>,
+				 <a href="composer-runtime_lib_api.js.html#sunlight-1-line-134">line 134</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The current participant,<br>or null if the transaction was submitted using an identity that does<br>not map to a participant.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-composer-common.Resource.html">module:composer-common.Resource</a></span>
+
+
+
+    </dd>
+</dl>
+
 
         
 
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">// Get the current participant.
+var currentParticipant = getCurrentParticipant();
+// Check to see if the current participant is a driver.
+if (currentParticipant.getFullyQualifiedType() !== &#x27;org.acme.Driver&#x27;) {
+  // Throw an error as the current participant is not a driver.
+  throw new Error(&#x27;Current participant is not a driver&#x27;);
+}
+// Check to see if the current participant is the first driver.
+if (currentParticipant.getFullyQualifiedIdentifier() !== &#x27;org.acme.Driver#DRIVER_1&#x27;) {
+  // Throw an error as the current participant is not a driver.
+  throw new Error(&#x27;Current participant is not the first driver&#x27;);
+}</pre>
 
-    <ul>
-        <li>BaseException</li>
-    </ul>
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="getFactory"><span class="type-signature"></span>getFactory()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Get the factory. The factory can be used to create new instances of<br>assets, participants, and transactions for storing in registries. The<br>factory can also be used for creating relationships to assets, particpants,<br>and transactions.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="composer-runtime_lib_api.js.html">composer-runtime/lib/api.js</a>,
+				 <a href="composer-runtime_lib_api.js.html#sunlight-1-line-46">line 46</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
 
 
     
@@ -268,7 +567,217 @@
     
 
     
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>The factory.</p>
+</div>
 
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-composer-runtime.Factory.html">module:composer-runtime.Factory</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">// Get the factory.
+var factory = getFactory();</pre>
+
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="getParticipantRegistry"><span class="type-signature"></span>getParticipantRegistry(id)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Get an existing participant registry using the unique identifier of the participant<br>registry. An participant registry can be used to retrieve, update, or delete<br>existing participants, or create new participants.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID of the participant registry.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="composer-runtime_lib_api.js.html">composer-runtime/lib/api.js</a>,
+				 <a href="composer-runtime_lib_api.js.html#sunlight-1-line-100">line 100</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>A promise. The promise is resolved with an {@link<br>module:composer-runtime.ParticipantRegistry ParticipantRegistry} instance<br>representing the participant registry if it exists. If the participant registry<br>does not exist, or the current user does not have access to the participant<br>registry, then the promise will be rejected with an error that describes<br>the problem.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+        <h5>Example</h5>
+        
+    <pre class="sunlight-highlight-javascript">// Get the driver participant registry.
+return getParticipantRegistry(&#x27;org.acme.Driver&#x27;)
+  .then(function (driverParticipantRegistry) {
+    // Call methods on the driver participant registry.
+  })
+  .catch(function (error) {
+    // Add optional error handling here.
+  });</pre>
+
+
+    
+</dd>
+
+        </dl>
     
 
     
